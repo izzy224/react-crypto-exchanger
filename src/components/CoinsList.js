@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CoinsContext } from "../contexts/coinsContext";
 import Coin from "./Coin";
 import { Table, Th, Tr, Thead, Tbody } from "@chakra-ui/table";
 import { Center } from "@chakra-ui/layout";
 const CoinsList = () => {
-  const { allCoins } = useContext(CoinsContext);
+  const { allCoins, currency } = useContext(CoinsContext);
+  useEffect(() => {}, [currency]);
   return (
     <>
       <Center>
@@ -12,10 +13,10 @@ const CoinsList = () => {
           <Thead>
             <Tr>
               <Th>Coin</Th>
-              <Th isNumeric>Price</Th>
-              <Th isNumeric>1h Change</Th>
-              <Th isNumeric>24h Change</Th>
-              <Th isNumeric>Market Cap</Th>
+              <Th isNumeric>Price({currency})</Th>
+              <Th isNumeric>1h Change({currency})</Th>
+              <Th isNumeric>24h Change({currency})</Th>
+              <Th isNumeric>Market Cap({currency})</Th>
             </Tr>
           </Thead>
           <Tbody>

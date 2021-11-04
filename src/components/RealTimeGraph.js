@@ -1,10 +1,9 @@
-import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-const RealTimeGraph = ({ coinId }) => {
+const RealTimeGraph = ({ coinId, currency }) => {
   const [currentData, setCurrentData] = useState({ data: { prices: [] } });
   const [chartData, setChartData] = useState({
     labels: [0],
@@ -13,10 +12,10 @@ const RealTimeGraph = ({ coinId }) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=1&interval=1m`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=1&interval=1m`
       )
       .then((response) => setCurrentData(response));
-  }, [coinId]);
+  }, [coinId, currency]);
 
   useEffect(() => {
     setChartData({

@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Box, Flex } from "@chakra-ui/layout";
 import {
   Stat,
   StatArrow,
@@ -9,11 +9,9 @@ import {
 } from "@chakra-ui/stat";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { CoinsContext } from "../contexts/coinsContext";
 
-const CoinInfo = ({ coinId }) => {
+const CoinInfo = ({ coinId, currency }) => {
   const [coinInfo, setCoinInfo] = useState({});
-  const { currency } = useContext(CoinsContext);
   useEffect(() => {
     axios
       .get(`https://api.coingecko.com/api//v3/coins/${coinId}`)
@@ -29,7 +27,9 @@ const CoinInfo = ({ coinId }) => {
               <StatLabel>Current price</StatLabel>
               <StatNumber>
                 {currency}
-                {coinInfo.market_data.current_price.usd}
+                {coinInfo.market_data.current_price[
+                  currency.toLowerCase()
+                ].toLocaleString()}
               </StatNumber>
               <StatHelpText>
                 <StatArrow
@@ -46,10 +46,9 @@ const CoinInfo = ({ coinId }) => {
               <StatLabel>7d price change</StatLabel>
               <StatNumber>
                 {currency}
-                {
-                  coinInfo.market_data.price_change_percentage_7d_in_currency
-                    .usd
-                }
+                {coinInfo.market_data.price_change_percentage_7d_in_currency[
+                  currency.toLowerCase()
+                ].toLocaleString()}
               </StatNumber>
               <StatHelpText>
                 <StatArrow
