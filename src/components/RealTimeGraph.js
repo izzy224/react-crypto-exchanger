@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -42,9 +43,16 @@ const RealTimeGraph = ({ coinId }) => {
   return (
     <>
       {chartData ? (
-        <Box w="50%">
+        <Box w="60%" m="0">
           {" "}
-          <Line data={chartData} options={{}} />
+          <Line
+            data={chartData}
+            options={{
+              interaction: {
+                intersect: false,
+              },
+            }}
+          />
         </Box>
       ) : (
         <div />

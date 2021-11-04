@@ -1,9 +1,11 @@
 import { Tr, Td } from "@chakra-ui/table";
 import { Image } from "@chakra-ui/image";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CoinsContext } from "../contexts/coinsContext";
 
 const Coin = ({ coin }) => {
+  const { currency } = useContext(CoinsContext);
   return (
     <>
       <Tr>

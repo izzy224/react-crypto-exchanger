@@ -6,7 +6,7 @@ const CoinsProvider = ({ children }) => {
   const [baseCoin, setBaseCoin] = useState({});
   const [compareCoin, setCompareCoin] = useState({});
   const [allCoins, setAllCoins] = useState([]);
-
+  const [currency, setCurrency] = useState("USD");
   useEffect(() => {
     axios
       .get(
@@ -22,6 +22,8 @@ const CoinsProvider = ({ children }) => {
     setBaseCoin,
     setCompareCoin,
     allCoins,
+    currency,
+    setCurrency,
   };
   return (
     <CoinsContext.Provider value={value}>{children}</CoinsContext.Provider>
