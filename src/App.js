@@ -15,7 +15,7 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route exact path="/exchange/:name">
+          <Route exact path="/exchange/:Id">
             <Exchange />
           </Route>
         </Suspense>

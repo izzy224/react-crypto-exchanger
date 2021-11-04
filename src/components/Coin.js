@@ -1,6 +1,7 @@
 import { Tr, Td } from "@chakra-ui/table";
 import { Image } from "@chakra-ui/image";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Coin = ({ coin }) => {
   return (
@@ -8,7 +9,7 @@ const Coin = ({ coin }) => {
       <Tr>
         <Td d="flex" alignItems="center" fontWeight="700">
           <Image src={coin.image} maxH="30px" m="0" pr="5px" />
-          {coin.name}
+          <Link to={`/exchange/${coin.id}`}>{coin.name}</Link>
         </Td>
         <Td isNumeric>${coin.current_price.toLocaleString()}</Td>
         <Td isNumeric>

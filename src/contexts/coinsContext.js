@@ -16,7 +16,6 @@ const CoinsProvider = ({ children }) => {
         setAllCoins(response.data);
       });
   }, []);
-  console.log(allCoins);
   const value = {
     baseCoin,
     compareCoin,
