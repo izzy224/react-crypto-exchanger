@@ -10,16 +10,23 @@ import CurrencyChoice from "./components/CurrencyChoice";
 function App() {
   const Homepage = lazy(() => import("./pages/Homepage"));
   const Exchange = lazy(() => import("./pages/Exchange"));
-  const { setCurrency, currency } = useContext(CoinsContext);
+  const ctx = useContext(CoinsContext);
 
   return (
     <div className="App">
       <NavBar />
-      <CurrencyChoice setCurrency={setCurrency} currency={currency} />
+      <CurrencyChoice
+        cryptoComparator={ctx.cryptoComparator}
+        setCryptoComparator={ctx.setCryptoComparator}
+        setCurrency={ctx.setCurrency}
+        currency={ctx.currency}
+        allCoins={ctx.allCoins}
+      />
       <Switch>
         <Suspense fallback="Loading...">
           <Route exact path="/">
             <Homepage />
+            {/* Todo - Pass allCoins through props, not through context */}
           </Route>
           <Route exact path="/exchange/:Id">
             <Exchange />

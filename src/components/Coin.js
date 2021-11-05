@@ -2,10 +2,8 @@ import { Tr, Td } from "@chakra-ui/table";
 import { Image } from "@chakra-ui/image";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CoinsContext } from "../contexts/coinsContext";
 
-const Coin = ({ coin }) => {
-  const { currency } = useContext(CoinsContext);
+const Coin = ({ coin, comparatorPrice }) => {
   return (
     <>
       <Tr>
@@ -23,6 +21,9 @@ const Coin = ({ coin }) => {
           {coin.price_change_percentage_24h.toFixed(1).toLocaleString()}%
         </Td>
         <Td isNumeric>{coin.market_cap.toLocaleString()}</Td>
+        <Td isNumeric>
+          {(coin.current_price / comparatorPrice).toPrecision(4)}
+        </Td>
       </Tr>
     </>
   );
