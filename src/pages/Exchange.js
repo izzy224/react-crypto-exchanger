@@ -7,11 +7,15 @@ import { CoinsContext } from "../contexts/coinsContext";
 
 const Exchange = () => {
   const { Id } = useParams();
-  const { currency } = useContext(CoinsContext);
+  const { currency, cryptoComparator } = useContext(CoinsContext);
   return (
     <>
       <Flex>
-        <RealTimeGraph currency={currency} coinId={Id} />
+        <RealTimeGraph
+          cryptoComparator={cryptoComparator}
+          currency={currency}
+          coinId={Id}
+        />
         <CoinInfo currency={currency} coinId={Id} />
       </Flex>
     </>

@@ -3,8 +3,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-const RealTimeGraph = ({ coinId, currency }) => {
+const RealTimeGraph = ({ coinId, currency, cryptoComparator }) => {
   const [currentData, setCurrentData] = useState({ data: { prices: [] } });
+  const [comparatorPrices, setComparatorPrices] = useState([]);
   const [chartData, setChartData] = useState({
     labels: [0],
     datasets: [{ label: "Price for the last 24 hours", data: [0] }],
@@ -16,6 +17,13 @@ const RealTimeGraph = ({ coinId, currency }) => {
       )
       .then((response) => setCurrentData(response));
   }, [coinId, currency]);
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${cryptoComparator}/market_chart?vs_currency=${currency}&days=1&interval=1m`
+      )
+      .then((response) => setComparatorPrices(response));
+  }, [currency, cryptoComparator]);
 
   useEffect(() => {
     setChartData({
@@ -34,10 +42,19 @@ const RealTimeGraph = ({ coinId, currency }) => {
           fill: false,
           backgroundColor: "rgb(255,99,132)",
           borderColor: "rgba(255, 99, 132, 0.2)",
+          yAxisID: "y1",
+        },
+        {
+          label: `Price in ${cryptoComparator}`,
+          data: comparatorPrices.data?.prices.map((price, i) => {
+            return currentData.data.prices[i][1] / price[1];
+          }),
+          fill: false,
+          yAxisID: "y2",
         },
       ],
     });
-  }, [currentData]);
+  }, [currentData, comparatorPrices]);
 
   return (
     <>
@@ -45,12 +62,29 @@ const RealTimeGraph = ({ coinId, currency }) => {
         <Box w="60%" m="0">
           {" "}
           <Line
-            data={chartData}
             options={{
+              responsive: true,
               interaction: {
+                mode: "index",
                 intersect: false,
               },
+              scales: {
+                y1: {
+                  type: "linear",
+                  display: true,
+                  position: "left",
+                },
+                y2: {
+                  type: "linear",
+                  display: true,
+                  position: "right",
+                  grid: {
+                    drawOnChartArea: false,
+                  },
+                },
+              },
             }}
+            data={chartData}
           />
         </Box>
       ) : (
