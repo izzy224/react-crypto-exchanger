@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Flex, Text } from "@chakra-ui/layout";
 import {
   Stat,
   StatArrow,
@@ -21,48 +21,53 @@ const CoinInfo = ({ coinId, currency }) => {
   return (
     <>
       {JSON.stringify(coinInfo) !== "{}" ? (
-        <Flex width="100%">
-          <StatGroup width="100%" flexWrap="wrap">
-            <Stat>
-              <StatLabel>Current price</StatLabel>
-              <StatNumber>
-                {currency}
-                {coinInfo.market_data.current_price[
-                  currency.toLowerCase()
-                ].toLocaleString()}
-              </StatNumber>
-              <StatHelpText>
-                <StatArrow
-                  type={
-                    coinInfo.market_data.price_change_percentage_24h > 0
-                      ? "increase"
-                      : "decrease"
-                  }
-                ></StatArrow>
-                {coinInfo.market_data.price_change_percentage_24h}%(24h)
-              </StatHelpText>
-            </Stat>
-            <Stat>
-              <StatLabel>7d price change</StatLabel>
-              <StatNumber>
-                {currency}
-                {coinInfo.market_data.price_change_percentage_7d_in_currency[
-                  currency.toLowerCase()
-                ].toLocaleString()}
-              </StatNumber>
-              <StatHelpText>
-                <StatArrow
-                  type={
-                    coinInfo.market_data.price_change_percentage_7d > 0
-                      ? "increase"
-                      : "decrease"
-                  }
-                ></StatArrow>
-                {coinInfo.market_data.price_change_percentage_7d}%
-              </StatHelpText>
-            </Stat>
-          </StatGroup>
-        </Flex>
+        <Box width="100%">
+          <Text fontWeight="extrabold" fontSize="3xl" width="100%">
+            {coinInfo.name}
+          </Text>
+          <Flex width="100%" flexWrap="wrap">
+            <StatGroup width="100%" flexWrap="wrap">
+              <Stat>
+                <StatLabel>Current price</StatLabel>
+                <StatNumber>
+                  {currency}
+                  {coinInfo.market_data.current_price[
+                    currency.toLowerCase()
+                  ].toLocaleString()}
+                </StatNumber>
+                <StatHelpText>
+                  <StatArrow
+                    type={
+                      coinInfo.market_data.price_change_percentage_24h > 0
+                        ? "increase"
+                        : "decrease"
+                    }
+                  ></StatArrow>
+                  {coinInfo.market_data.price_change_percentage_24h}%(24h)
+                </StatHelpText>
+              </Stat>
+              <Stat>
+                <StatLabel>7d price change</StatLabel>
+                <StatNumber>
+                  {currency}
+                  {coinInfo.market_data.price_change_percentage_7d_in_currency[
+                    currency.toLowerCase()
+                  ].toLocaleString()}
+                </StatNumber>
+                <StatHelpText>
+                  <StatArrow
+                    type={
+                      coinInfo.market_data.price_change_percentage_7d > 0
+                        ? "increase"
+                        : "decrease"
+                    }
+                  ></StatArrow>
+                  {coinInfo.market_data.price_change_percentage_7d}%
+                </StatHelpText>
+              </Stat>
+            </StatGroup>
+          </Flex>
+        </Box>
       ) : (
         <Box />
       )}

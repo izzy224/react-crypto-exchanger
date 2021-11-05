@@ -4,28 +4,18 @@ import { Select } from "@chakra-ui/select";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { CoinsContext } from "./contexts/coinsContext";
+import { Box, Flex } from "@chakra-ui/layout";
+import CurrencyChoice from "./components/CurrencyChoice";
 
 function App() {
   const Homepage = lazy(() => import("./pages/Homepage"));
   const Exchange = lazy(() => import("./pages/Exchange"));
   const { setCurrency, currency } = useContext(CoinsContext);
-  const handleInputChange = (event) => {
-    setCurrency(event.target.value);
-  };
+
   return (
     <div className="App">
       <NavBar />
-
-      <Select
-        value={currency}
-        onChange={handleInputChange}
-        placeholder="Currency"
-      >
-        <option value="USD">USD</option>
-        <option value="JPY">JPY</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-      </Select>
+      <CurrencyChoice setCurrency={setCurrency} currency={currency} />
       <Switch>
         <Suspense fallback="Loading...">
           <Route exact path="/">

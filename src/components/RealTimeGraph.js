@@ -27,7 +27,7 @@ const RealTimeGraph = ({ coinId, currency }) => {
       }),
       datasets: [
         {
-          label: "Price in USD",
+          label: `Price in ${currency}`,
           data: currentData.data.prices.map((price) => {
             return price[1];
           }),
