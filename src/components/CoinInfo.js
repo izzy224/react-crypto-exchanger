@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { Image } from "@chakra-ui/image";
 import React, { useEffect, useState, useContext } from "react";
-
+import ReactHtmlParser from "react-html-parser";
 const CoinInfo = ({ coinId, currency }) => {
   const [coinInfo, setCoinInfo] = useState({});
   useEffect(() => {
@@ -89,6 +89,7 @@ const CoinInfo = ({ coinId, currency }) => {
               </Stat>
             </StatGroup>
           </Flex>
+          <Text>{ReactHtmlParser(coinInfo.description.en)}</Text>
         </Box>
       ) : (
         <Box />
