@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useContext } from "react";
 import { Route, Switch } from "react-router";
-import { Select } from "@chakra-ui/select";
+
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { CoinsContext } from "./contexts/coinsContext";

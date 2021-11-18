@@ -46,8 +46,10 @@ const RealTimeGraph = ({ coinId, currency, cryptoComparator }) => {
         },
         {
           label: `Price in ${cryptoComparator}`,
-          data: comparatorPrices.data?.prices.map((price, i) => {
-            return currentData.data.prices[i][1] / price[1];
+          data: comparatorPrices?.data?.prices?.map((price, i) => {
+            if (price && currentData.data.prices[i]) {
+              return currentData?.data?.prices[i][1] / price[1];
+            }
           }),
           fill: false,
           yAxisID: "y2",

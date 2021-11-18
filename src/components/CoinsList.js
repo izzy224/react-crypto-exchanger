@@ -10,7 +10,7 @@ const CoinsList = () => {
     let comparatorCoin = allCoins.find((c) => {
       return c.id == cryptoComparator;
     });
-    setComparatorPrice(comparatorCoin.current_price);
+    setComparatorPrice(comparatorCoin?.current_price);
   }, [currency]);
 
   return (

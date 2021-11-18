@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import CoinsProvider from "./contexts/coinsContext";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>

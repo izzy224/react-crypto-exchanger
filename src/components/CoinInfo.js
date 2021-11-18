@@ -8,6 +8,7 @@ import {
   StatNumber,
 } from "@chakra-ui/stat";
 import axios from "axios";
+import { Image } from "@chakra-ui/image";
 import React, { useEffect, useState, useContext } from "react";
 
 const CoinInfo = ({ coinId, currency }) => {
@@ -22,9 +23,12 @@ const CoinInfo = ({ coinId, currency }) => {
     <>
       {JSON.stringify(coinInfo) !== "{}" ? (
         <Box width="100%">
-          <Text fontWeight="extrabold" fontSize="3xl" width="100%">
-            {coinInfo.name}
-          </Text>
+          <Flex width="100%" justifyContent="center">
+            <Text fontWeight="extrabold" fontSize="3xl" pr="10px">
+              {coinInfo.name}
+            </Text>
+            <Image src={coinInfo.image.small} />
+          </Flex>
           <Flex width="100%" flexWrap="wrap">
             <StatGroup width="100%" flexWrap="wrap">
               <Stat>
@@ -47,7 +51,7 @@ const CoinInfo = ({ coinId, currency }) => {
                 </StatHelpText>
               </Stat>
               <Stat>
-                <StatLabel>7d price change</StatLabel>
+                <StatLabel>7D price change</StatLabel>
                 <StatNumber>
                   {currency}
                   {coinInfo.market_data.price_change_percentage_7d_in_currency[
@@ -64,6 +68,24 @@ const CoinInfo = ({ coinId, currency }) => {
                   ></StatArrow>
                   {coinInfo.market_data.price_change_percentage_7d}%
                 </StatHelpText>
+              </Stat>
+              <Stat>
+                <StatLabel>7D High</StatLabel>
+                <StatNumber>
+                  {currency}
+                  {coinInfo.market_data.high_24h[
+                    currency.toLowerCase()
+                  ].toLocaleString()}
+                </StatNumber>
+              </Stat>
+              <Stat>
+                <StatLabel>7D Low</StatLabel>
+                <StatNumber>
+                  {currency}
+                  {coinInfo.market_data.low_24h[
+                    currency.toLowerCase()
+                  ].toLocaleString()}
+                </StatNumber>
               </Stat>
             </StatGroup>
           </Flex>
